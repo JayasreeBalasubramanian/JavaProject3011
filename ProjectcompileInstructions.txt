@@ -1,0 +1,86 @@
+================================================================================
+CRYPTIQ — Offline Developer Data-Leak Prevention & Restoration Utility
+Core Java Laboratory Project | 2nd Year CSE
+================================================================================
+
+TEAM MEMBERS:
+- Jayasree B
+- Janani R S
+- Dharani R
+
+--------------------------------------------------------------------------------
+1. PROJECT OVERVIEW
+--------------------------------------------------------------------------------
+CRYPTIQ is an offline desktop security utility designed to prevent hardcoded 
+secrets (API keys, database URLs, emails, IP addresses) from leaking into public 
+cloud AI models during code debugging. 
+
+It provides two-way reversible masking: sensitive tokens are extracted and 
+persisted in a local SQLite vault, allowing instant one-click restoration 
+after receiving the AI's output.
+
+Core Concepts Demonstrated:
+- Unit V: AWT Multi-Window GUI, Containers & Event Handling
+- Units II & IV: Regular Expressions (Pattern & Matcher) & String Processing
+- Unit IV: Database Connectivity (JDBC) with SQLite
+- Unit III: Multithreading (Background worker thread via EventQueue.invokeLater)
+- Unit III: Exception Handling & Robust State Management
+
+--------------------------------------------------------------------------------
+2. PREREQUISITES
+--------------------------------------------------------------------------------
+- Java Development Kit (JDK 8 or higher installed and added to PATH)
+- SQLite JDBC Driver (`sqlite-jdbc.jar` included in this folder)
+
+--------------------------------------------------------------------------------
+3. EXECUTION INSTRUCTIONS (STEP-BY-STEP)
+--------------------------------------------------------------------------------
+
+STEP 1: Open Terminal / Command Prompt
+Navigate to the project directory containing `CryptiqApp.java` and `sqlite-jdbc.jar`:
+   cd path/to/CryptiqProject
+
+STEP 2: Compile the Project
+Run the following compilation command:
+
+   • On Windows:
+     javac -cp ".;sqlite-jdbc.jar" CryptiqApp.java
+
+   • On macOS / Linux:
+     javac -cp ".:sqlite-jdbc.jar" CryptiqApp.java
+
+STEP 3: Run the Application
+Execute the compiled application with:
+
+   • On Windows:
+     java -cp ".;sqlite-jdbc.jar" CryptiqApp
+
+   • On macOS / Linux:
+     java -cp ".:sqlite-jdbc.jar" CryptiqApp
+
+--------------------------------------------------------------------------------
+4. EVALUATION & DEMONSTRATION WORKFLOW
+--------------------------------------------------------------------------------
+Once the desktop window launches:
+
+1. Test Scrubbing (Masking):
+   - Sample source code containing credentials is pre-loaded in the Input area.
+   - Select the desired active rule checkboxes at the top.
+   - Click the "Scrub Text" button.
+   - Verify that credentials are substituted with tags (e.g., [REDACTED_API_KEY_1])
+     in the Output pane, and the status bar reports secrets scrubbed.
+
+2. Test 2-Way Restoration:
+   - Click "Restore Original".
+   - Verify that the masked tags in the output pane are replaced back with 
+     the original raw credentials retrieved from the SQLite `secret_vault` table.
+
+3. Test SQLite Audit Logging:
+   - Click "View Audit Log".
+   - A secondary dialog window will pop up showing the audit records queried 
+     via JDBC from the `audit_log` table (Timestamp, Rules Applied, Redacted Count, Status).
+
+4. Test Utilities:
+   - "Copy Output" copies the scrubbed code to the system clipboard.
+   - "Clear" resets both panes.
+================================================================================
